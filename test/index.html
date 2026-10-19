@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check that Atlas's Safari blockers are on. This page makes no third-party requests.">
+  <title>Atlas Test Page</title>
+  <link rel="icon" href="../icon.png">
+  <link rel="stylesheet" href="../styles.css">
+  <script>window.adScriptRan = false; window.trackerScriptRan = false; window.cookieScriptRan = false;</script>
+  <!-- The files sit next to this page and the filter lists block them by path, so nothing goes to a third
+       party. Element hiding is not tested: EasyList switches generic hiding off on github.io. -->
+  <script src="js/flyad.js"></script>
+  <script src="adstrack.js"></script>
+  <script src="_cookienotice.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../"><img src="../icon.png" alt="">Atlas</a>
+      <nav aria-label="Pages"><a href="../">Support</a><a href="../privacy.html">Privacy</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <p class="eyebrow" data-text="eyebrow">Test page</p>
+      <h1 data-text="title">Are the blockers working?</h1>
+      <p data-text="intro">Open this page in Safari. Each check below is a file the filter lists block; it turns green when Safari blocked it. The page loads nothing from other sites.</p>
+      <p class="summary" id="summary" aria-live="polite">…</p>
+    </section>
+    <ul class="checks" id="checks">
+      <li data-check="adScript"><span class="status">…</span><span><span data-text="adScript">Ad script</span><small>EasyList · /js/flyad.js</small></span></li>
+      <li data-check="trackerScript"><span class="status">…</span><span><span data-text="trackerScript">Tracking script</span><small>EasyPrivacy · /adstrack.js</small></span></li>
+      <li data-check="cookieScript"><span class="status">…</span><span><span data-text="cookieScript">Cookie notice script</span><small>EasyList Cookie List · /_cookienotice.js</small></span></li>
+    </ul>
+  </main>
+  <footer><div class="wrap"><p>Atlas</p></div></footer>
+  <script>
+    const texts = {
+      en: {
+        eyebrow: "Test page", title: "Are the blockers working?",
+        intro: "Open this page in Safari. Each check below is a file the filter lists block; it turns green when Safari blocked it. The page loads nothing from other sites.",
+        adScript: "Ad script (Ads blocker)", trackerScript: "Tracking script (Trackers blocker)",
+        cookieScript: "Cookie notice script (Cookie Notices blocker)",
+        blocked: "Blocked", notBlocked: "Not blocked",
+        all: "All 3 checks blocked. Safari is using the blockers.",
+        some: (n) => `${n} of 3 checks blocked. Turn on the blockers that are still off in Safari's page menu › Manage Extensions, then reload this page.`,
+      },
+      "zh-Hans": {
+        eyebrow: "测试页", title: "拦截器在工作吗？",
+        intro: "请在 Safari 中打开本页。下面每一项都是过滤列表会拦截的内容，被 Safari 拦下后会变成绿色。本页不会从其他网站加载任何东西。",
+        adScript: "广告脚本（广告拦截器）", trackerScript: "跟踪脚本（跟踪器拦截器）",
+        cookieScript: "Cookie 提示脚本（Cookie 提示拦截器）",
+        blocked: "已拦截", notBlocked: "未拦截",
+        all: "3 项全部拦下，Safari 正在使用拦截器。",
+        some: (n) => `拦下了 ${n}/3 项。请在 Safari 的页面菜单 › 管理扩展中打开还没开的拦截器，然后重新载入本页。`,
+      },
+      ja: {
+        eyebrow: "テストページ", title: "ブロッカーは動いていますか？",
+        intro: "このページをSafariで開いてください。下の各項目はフィルタリストがブロックするもので、Safariがブロックすると緑色になります。このページはほかのサイトから何も読み込みません。",
+        adScript: "広告スクリプト（広告ブロッカー）", trackerScript: "トラッキングスクリプト（トラッカーブロッカー）",
+        cookieScript: "Cookie通知スクリプト（Cookie通知ブロッカー）",
+        blocked: "ブロック済み", notBlocked: "未ブロック",
+        all: "3項目すべてブロックされました。Safariはブロッカーを使っています。",
+        some: (n) => `3項目中${n}項目をブロックしました。Safariのページメニュー › 機能拡張を管理で、オフのブロッカーをオンにしてから再読み込みしてください。`,
+      },
+      de: {
+        eyebrow: "Testseite", title: "Funktionieren die Blocker?",
+        intro: "Öffne diese Seite in Safari. Jede Prüfung unten ist eine Datei, die die Filterlisten blockieren; sie wird grün, wenn Safari sie blockiert hat. Die Seite lädt nichts von anderen Websites.",
+        adScript: "Werbeskript (Blocker „Werbung“)", trackerScript: "Tracking-Skript (Blocker „Tracker“)",
+        cookieScript: "Cookie-Hinweis-Skript (Blocker „Cookie-Hinweise“)",
+        blocked: "Blockiert", notBlocked: "Nicht blockiert",
+        all: "Alle 3 Prüfungen blockiert. Safari nutzt die Blocker.",
+        some: (n) => `${n} von 3 Prüfungen blockiert. Schalte die noch ausgeschalteten Blocker im Seitenmenü von Safari › „Erweiterungen verwalten“ ein und lade diese Seite neu.`,
+      },
+      fr: {
+        eyebrow: "Page de test", title: "Les bloqueurs fonctionnent-ils\u00a0?",
+        intro: "Ouvrez cette page dans Safari. Chaque vérification ci-dessous est un fichier que les listes de filtres bloquent\u00a0; elle passe au vert quand Safari l’a bloqué. La page ne charge rien depuis d’autres sites.",
+        adScript: "Script publicitaire (bloqueur Publicités)", trackerScript: "Script de pistage (bloqueur Traqueurs)",
+        cookieScript: "Script de bannière cookies (bloqueur Bannières cookies)",
+        blocked: "Bloqué", notBlocked: "Non bloqué",
+        all: "Les 3 vérifications sont bloquées. Safari utilise les bloqueurs.",
+        some: (n) => `${n} vérification(s) bloquée(s) sur 3. Activez les bloqueurs encore désactivés dans le menu de la page de Safari › «\u00a0Gérer les extensions\u00a0», puis rechargez cette page.`,
+      },
+    };
+    const language = navigator.languages.map((l) => l.startsWith("zh") ? "zh-Hans" : l.slice(0, 2)).find((l) => texts[l]) || "en";
+    const t = texts[language];
+    document.documentElement.lang = language;
+    document.querySelectorAll("[data-text]").forEach((el) => { el.textContent = t[el.dataset.text]; });
+
+    window.addEventListener("load", () => {
+      const results = {
+        adScript: !window.adScriptRan,
+        trackerScript: !window.trackerScriptRan,
+        cookieScript: !window.cookieScriptRan,
+      };
+      let passed = 0;
+      document.querySelectorAll("#checks li").forEach((li) => {
+        const ok = results[li.dataset.check];
+        if (ok) passed += 1;
+        li.classList.add(ok ? "pass" : "fail");
+        li.querySelector(".status").textContent = ok ? "✓ " + t.blocked : "✗ " + t.notBlocked;
+      });
+      document.getElementById("summary").textContent = passed === 3 ? t.all : t.some(passed);
+    });
+  </script>
+</body>
+</html>
