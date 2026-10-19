@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="A sample article with mock ads, for seeing what Atlas removes in Safari.">
+  <title>Example News · Atlas demo</title>
+  <link rel="icon" href="../icon.png">
+  <link rel="stylesheet" href="demo.css">
+  <!-- Everything below the article is a mock. The ads come from js/flyad.js (blocked by the EasyList
+       filter "/js/flyad.js") and the consent wall from _cookienotice.js (EasyList Cookie List,
+       "/_cookienotice.js"), so with Atlas on, Safari never loads them and the page stays clean. -->
+  <script src="strings.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="column">
+      <span class="menu" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="title">Example News</span>
+      <span class="search" aria-hidden="true"></span>
+    </div>
+  </header>
+  <div id="ad-top" class="slot"></div>
+  <main class="column layout">
+    <article>
+      <p class="kicker" data-text="kicker"></p>
+      <h1 data-text="title"></h1>
+      <p class="dek" data-text="dek"></p>
+      <p class="byline" data-text="byline"></p>
+      <svg class="hero" viewBox="0 0 640 300" role="img" aria-label="">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d9b8"/><stop offset="1" stop-color="#cfe3ea"/></linearGradient>
+          <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fa3b8"/><stop offset="1" stop-color="#3d6f88"/></linearGradient>
+        </defs>
+        <rect width="640" height="300" fill="url(#sky)"/>
+        <circle cx="470" cy="92" r="34" fill="#fbe6c8"/>
+        <path d="M0 190 L110 92 L190 160 L280 70 L380 170 L460 112 L560 180 L640 130 L640 300 L0 300 Z" fill="#7d93a3"/>
+        <path d="M0 210 L90 150 L170 196 L260 132 L350 200 L450 156 L540 206 L640 170 L640 300 L0 300 Z" fill="#5d7586"/>
+        <rect y="214" width="640" height="86" fill="url(#lake)"/>
+        <path d="M60 246 h120 M240 262 h90 M400 240 h140 M120 280 h70" stroke="#a9c9d6" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <p data-text="p1"></p>
+      <div id="ad-inline" class="slot"></div>
+      <p data-text="p2"></p>
+      <p data-text="p3"></p>
+      <p data-text="p4"></p>
+    </article>
+    <aside>
+      <div id="ad-side" class="slot"></div>
+      <h2 data-text="mostRead"></h2>
+      <ol>
+        <li data-text="read1"></li>
+        <li data-text="read2"></li>
+        <li data-text="read3"></li>
+      </ol>
+    </aside>
+  </main>
+  <script>
+    for (const node of document.querySelectorAll("[data-text]")) node.textContent = demo.text[node.dataset.text];
+  </script>
+  <script src="js/flyad.js"></script>
+  <script src="_cookienotice.js"></script>
+</body>
+</html>
